@@ -1,0 +1,52 @@
+{
+    "Description": "ClientVpnEndpoint",
+
+    "Parameters" : {
+        "VpnPortParameter" : {
+          "Type" : "String",
+          "Default" : "443",
+          "Description" : "Enter the listening port of the ClientVPNEndpoint"
+        },
+        "ClientCIDRParameter" : {
+            "Type" : "String",
+            "Description" : "Enter the Client CIDR Block. I.E: 10.150.0.0/16 "
+          },
+        "VPCidParameter" : {
+            "Type" : "String",
+            "Description" : "Enter the VPC id where you would like to deploy this ClientVPNEndpoint "
+          },
+        "CERTParameter" : {
+            "Type" : "String",
+            "Description" : "Enter the ARN of the Certificate in ACM "
+            }
+      },
+
+
+    "Resources": {
+    "ClientVpnEndpoint": {
+      "Type" : "AWS::EC2::ClientVpnEndpoint",
+      "Properties" : {
+          "AuthenticationOptions" : [
+            {
+                "MutualAuthentication" : {
+                    "ClientRootCertificateChainArn" : { "Ref" : "CERTParameter" }
+                },
+                "Type" : "certificate-authentication"
+              }],
+          "ClientCidrBlock" : { "Ref" : "ClientCIDRParameter" },
+          "ClientConnectOptions" : {
+              "Enabled" : false}
+              ,
+          "ConnectionLogOptions" :{
+            "Enabled" : false}
+            ,
+          "Description" : "ClientVPNEndpoint to connect to your VPC",
+          "SelfServicePortal" : "disabled",
+          "ServerCertificateArn" : { "Ref" : "CERTParameter" },
+          "VpcId" : { "Ref" : "VPCidParameter" },
+          "VpnPort" : { "Ref" : "VpnPortParameter" }
+        }
+    }
+    }
+}
+    
