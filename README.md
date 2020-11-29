@@ -1,0 +1,2 @@
+# cloudforming
+CloudFormation working templates 
