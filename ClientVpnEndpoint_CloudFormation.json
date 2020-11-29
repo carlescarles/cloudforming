@@ -1,5 +1,5 @@
 {
-    "Description": "ClientVpnEndpoint",
+    "Description": "ClientVpnEndpoint CloudFormation template v1",
 
     "Parameters" : {
         "VpnPortParameter" : {
